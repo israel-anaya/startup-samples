@@ -1,0 +1,14 @@
+spring:  
+  cloud:    config:
+      name: sample-ms-ts-customer      discovery:        service-id: startup-starter-msa-config-server-${spring.profiles.active} 
+        enabled: true  profiles:    active: local
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8762/eureka/
+
+

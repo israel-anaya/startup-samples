@@ -1,0 +1,55 @@
+/*
+ * Copyright 2019-2020 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package sample.ms.ts.customer.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.startupframework.controller.DataTransferObjectServiceChildController;
+
+import sample.ms.ts.customer.dto.CustomerAddressDTO;
+import sample.ms.ts.customer.service.CustomerAddressService;
+
+/**
+ *
+ * @author Arq. Jesús Israel Anaya Salazar
+ */
+@RestController
+@RequestMapping("/v1.0/customers/{parentId}/addresses")
+@CrossOrigin(origins = "*")
+class CustomerAddressController
+		extends DataTransferObjectServiceChildController<CustomerAddressDTO, CustomerAddressService> {
+
+	@Autowired
+	protected CustomerAddressController(CustomerAddressService service) {
+		super(service);
+	}
+
+	@Override
+	protected void updateProperties(CustomerAddressDTO source, CustomerAddressDTO target) {
+
+		updateProperty(source::getType, target::setType);
+		updateProperty(source::getStreet, target::setStreet);
+		updateProperty(source::getCity, target::setCity);
+		updateProperty(source::getCountry, target::setCountry);
+		updateProperty(source::getState, target::setState);
+		updateProperty(source::getZipCode, target::setZipCode);
+		updateProperty(source::getActive, target::setActive);
+
+	}
+}
