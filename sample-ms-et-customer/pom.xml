@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.startupframework</groupId>
 		<artifactId>startup-starter-ms-parent</artifactId>
-		<version>1.0.1.RELEASE</version>
+		<version>1.0.2.RELEASE</version>
 	</parent>
 
 	<properties>
@@ -23,13 +23,13 @@
 		<dependency>
 			<groupId>org.startupframework</groupId>
 			<artifactId>startup-starter-core</artifactId>
-			<version>1.0.1.RELEASE</version>
+			<version>1.0.2.RELEASE</version>
 		</dependency>
 		<!-- Startup Data -->
 		<dependency>
 			<groupId>org.startupframework</groupId>
 			<artifactId>startup-starter-data</artifactId>
-			<version>1.0.1.RELEASE</version>
+			<version>1.0.2.RELEASE</version>
 		</dependency>
 		<!-- Domains -->
 		<dependency>
@@ -37,10 +37,22 @@
 			<artifactId>sample-domain-customer</artifactId>
 			<version>1.0.RELEASE</version>
 		</dependency>
-		<!-- Postgres Driver -->
+		<!-- Database Driver -->
 		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.junit.vintage</groupId>
+					<artifactId>junit-vintage-engine</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 	<build>

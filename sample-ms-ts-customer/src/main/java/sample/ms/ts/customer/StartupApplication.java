@@ -30,10 +30,10 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableAutoConfiguration
-@ComponentScan(basePackages = "sample.ms.et.customer.controller")
-@ComponentScan(basePackages = "sample.ms.et.customer.datasource")
-@ComponentScan(basePackages = "sample.ms.et.customer.service")
-@EnableFeignClients
+//@ComponentScan(basePackages = "sample.ms.et.customer.controller")
+//@ComponentScan(basePackages = "sample.ms.et.customer.adapter")
+//@ComponentScan(basePackages = "sample.ms.et.customer.service")
+@EnableFeignClients(basePackages = "sample.dm.customer.service.client")
 public class StartupApplication {
 
 	public static void main(String[] args) {

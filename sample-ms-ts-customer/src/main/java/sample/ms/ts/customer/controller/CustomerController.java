@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.startupframework.controller.DataTransferObjectServiceController;
+import org.startupframework.controller.service.CRUDControllerBase;
 
 import sample.ms.ts.customer.dto.CustomerDTO;
 import sample.ms.ts.customer.service.CustomerService;
@@ -32,7 +32,7 @@ import sample.ms.ts.customer.service.CustomerService;
 @RestController
 @RequestMapping("/v1.0/customers")
 @CrossOrigin(origins = "*")
-class CustomerController extends DataTransferObjectServiceController<CustomerDTO, CustomerService> {
+class CustomerController extends CRUDControllerBase<CustomerDTO, CustomerService> {
 
 	@Autowired
 	protected CustomerController(CustomerService service) {
@@ -50,6 +50,6 @@ class CustomerController extends DataTransferObjectServiceController<CustomerDTO
 		updateProperty(source::getSex, target::setSex);
 		updateProperty(source::getRfc, target::setRfc);
 		updateProperty(source::getCurp, target::setCurp);
-		
+
 	}
 }

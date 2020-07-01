@@ -16,24 +16,18 @@
 
 package sample.dm.customer.dto;
 
-import org.startupframework.dto.ChildDataTransferObject;
-import org.startupframework.dto.EntitySupportDTO;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.startupframework.dto.EntityChildDTO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@JsonIgnoreProperties({"id"})
-public class CustomerAddressDTO extends EntitySupportDTO implements ChildDataTransferObject {
+public class CustomerAddressDTO extends EntityChildDTO {
 	
 	public CustomerAddressDTO() {		
 	}	
-	
-	private String childId;
-	
+		
 	private String type;
 	
 	private String street;

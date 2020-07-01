@@ -18,7 +18,7 @@ package sample.ms.ts.customer.dto;
 
 import java.util.Date;
 
-import org.startupframework.dto.EntitySupportDTO;
+import org.startupframework.dto.EntityDTO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -27,7 +27,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class CustomerDTO extends EntitySupportDTO {
+public class CustomerDTO extends EntityDTO {
 	
 	public CustomerDTO() {		
 	}

@@ -16,15 +16,15 @@
 
 package sample.ms.ts.customer.dto;
 
-import org.startupframework.dto.ChildDataTransferObject;
-import org.startupframework.dto.EntitySupportDTO;
+import org.startupframework.dto.DataTransferObjectChild;
+import org.startupframework.dto.EntityDTO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class CustomerAddressDTO extends EntitySupportDTO implements ChildDataTransferObject {
+public class CustomerAddressDTO extends EntityDTO implements DataTransferObjectChild {
 	
 	public CustomerAddressDTO() {		
 	}	

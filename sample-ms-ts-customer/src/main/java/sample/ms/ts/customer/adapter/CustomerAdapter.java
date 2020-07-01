@@ -14,31 +14,31 @@
  * limitations under the License.
  */
 
-package sample.ms.et.customer.datasource;
+package sample.ms.ts.customer.adapter;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.startupframework.data.datasource.EntityServiceDataSource;
-import org.startupframework.data.entity.DataConverter;
+import org.startupframework.adapter.CRUDFeignClientAdapterBase;
+import org.startupframework.dto.DTOConverter;
 
-import sample.dm.customer.dto.CustomerDTO;
-import sample.ms.et.customer.entity.CustomerEntity;
-import sample.ms.et.customer.service.CustomerService;
+import sample.dm.customer.service.client.ETCustomerService;
+import sample.ms.ts.customer.dto.CustomerDTO;
 
 @Service
-public class CustomerDataSource
-		extends EntityServiceDataSource<CustomerDTO, CustomerEntity, CustomerService> {
+public class CustomerAdapter
+		extends CRUDFeignClientAdapterBase<sample.dm.customer.dto.CustomerDTO, CustomerDTO, ETCustomerService> {
 
 	@Mapper
-	public interface Converter extends DataConverter<CustomerDTO, CustomerEntity> {
+	public interface Converter extends DTOConverter<sample.dm.customer.dto.CustomerDTO, CustomerDTO> {
 		static final Converter INSTANCE = Mappers.getMapper(Converter.class);
 
 	}
 
 	@Autowired
-	protected CustomerDataSource(CustomerService service) {
-		super(service, Converter.INSTANCE);
+	protected CustomerAdapter(final ETCustomerService feignClient) {
+		super(feignClient, Converter.INSTANCE);
 	}
+
 }

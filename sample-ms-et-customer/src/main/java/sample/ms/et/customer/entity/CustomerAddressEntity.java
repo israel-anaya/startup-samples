@@ -25,6 +25,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.startupframework.data.entity.EntityBase;
+import org.startupframework.data.entity.id.EntityId;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -34,6 +35,7 @@ import lombok.EqualsAndHashCode;
  * @author Arq. Jesús Israel Anaya Salazar
  */
 @Entity
+@EntityId("ADDR")
 @Data()
 @EqualsAndHashCode(callSuper = true)
 public class CustomerAddressEntity extends EntityBase {
@@ -88,13 +90,5 @@ public class CustomerAddressEntity extends EntityBase {
 	@NotEmpty
 	@Size(max = 200)
 	private String country; // Pais
-
-	static final String PREFIX_ID = "ADDR";
-
-	@Override
-	protected String prefixId() {
-		return PREFIX_ID;
-	}
-
 
 }

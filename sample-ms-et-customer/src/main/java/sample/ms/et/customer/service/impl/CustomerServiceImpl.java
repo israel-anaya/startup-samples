@@ -53,7 +53,7 @@ class CustomerServiceImpl extends EntityServiceBase<CustomerRepository, Customer
 	final OldNewPred<CustomerEntity> NEED_IDNUM = (o, n) -> !Objects.equals(o.getIdNumber(), n.getIdNumber());
 
 	@Override
-	protected void onValidateEntity(CustomerEntity entity) {
+	protected void onValidateObject(CustomerEntity entity) {
 
 		Optional<CustomerEntity> oldEntity = getRepository().findById(entity.getId());
 

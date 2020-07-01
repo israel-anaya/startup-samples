@@ -16,7 +16,7 @@
 
 package sample.ms.ts.customer.service;
 
-import org.startupframework.service.ChildDataTransferObjectService;
+import org.startupframework.service.CRUDServiceChild;
 
 import sample.ms.ts.customer.dto.CustomerAddressDTO;
 
@@ -24,6 +24,6 @@ import sample.ms.ts.customer.dto.CustomerAddressDTO;
  *
  * @author Arq. Jesús Israel Anaya Salazar
  */
-public interface CustomerAddressService extends ChildDataTransferObjectService<CustomerAddressDTO> {
+public interface CustomerAddressService extends CRUDServiceChild<CustomerAddressDTO> {
 
 }

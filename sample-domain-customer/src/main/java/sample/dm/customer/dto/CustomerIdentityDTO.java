@@ -16,19 +16,19 @@
 
 package sample.dm.customer.dto;
 
-import org.startupframework.dto.EntitySupportDTO;
+import org.startupframework.dto.DataTransferObjectBase;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class CustomerIdentityDTO extends EntitySupportDTO {
+public class CustomerIdentityDTO extends DataTransferObjectBase {
 	
 	public CustomerIdentityDTO() {		
 	}
 	
-	private String curp;		
+	private String curp;
 	private String rfc;
 	private byte[] ocr;
 }

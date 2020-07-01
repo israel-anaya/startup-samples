@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.startupframework.data.entity.EntityBase;
-import org.startupframework.data.entity.EntityPrefix;
+import org.startupframework.data.entity.id.EntityId;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,8 +20,9 @@ import lombok.EqualsAndHashCode;
  *
  * @author Arq. Jesús Israel Anaya Salazar
  */
-@EntityPrefix("CUST")
+
 @Entity
+@EntityId("CUST")
 @Data()
 @EqualsAndHashCode(callSuper = true)
 public class CustomerEntity extends EntityBase {
@@ -85,12 +86,5 @@ public class CustomerEntity extends EntityBase {
 	@NotEmpty
 	@Size(max = 20)
 	private String idNumber; // CI, CC, DNI, INE/IFE
-
-	static final String PREFIX_ID = "CUST";
-
-	@Override
-	protected String prefixId() {
-		return PREFIX_ID;
-	}
 
 }

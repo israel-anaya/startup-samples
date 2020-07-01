@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.startupframework</groupId>
 		<artifactId>startup-starter-ms-parent</artifactId>
-		<version>1.0.1.RELEASE</version>
+		<version>1.0.2.RELEASE</version>
 	</parent>
 
 	<properties>
@@ -28,7 +28,7 @@
 		<dependency>
 			<groupId>org.startupframework</groupId>
 			<artifactId>startup-starter-core</artifactId>
-			<version>1.0.1.RELEASE</version>
+			<version>1.0.2.RELEASE</version>
 		</dependency>
 		<!-- Domains -->
 		<dependency>

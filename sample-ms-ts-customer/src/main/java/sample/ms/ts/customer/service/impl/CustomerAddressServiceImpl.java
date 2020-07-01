@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-import org.startupframework.service.ChildDataTransferObjectServiceBase;
+import org.startupframework.service.dto.CRUDServiceChildBase;
 
 import sample.ms.ts.customer.dto.CustomerAddressDTO;
 import sample.ms.ts.customer.service.CustomerAddressService;
@@ -30,7 +30,7 @@ import sample.ms.ts.customer.service.CustomerAddressService;
  * @author Arq. Jesús Israel Anaya Salazar
  */
 @Service
-class CustomerAddressServiceImpl extends ChildDataTransferObjectServiceBase<CustomerAddressDTO>
+class CustomerAddressServiceImpl extends CRUDServiceChildBase<CustomerAddressDTO>
 		implements CustomerAddressService {
 
 	protected CustomerAddressServiceImpl() {
@@ -38,7 +38,7 @@ class CustomerAddressServiceImpl extends ChildDataTransferObjectServiceBase<Cust
 	}
 
 	@Override
-	protected void onValidateEntity(CustomerAddressDTO item) {
+	protected void onValidateObject(CustomerAddressDTO item) {
 		// TODO Auto-generated method stub
 
 	}

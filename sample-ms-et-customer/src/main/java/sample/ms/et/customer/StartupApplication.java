@@ -33,9 +33,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableAutoConfiguration
 @EntityScan(basePackages = "sample.ms.et.customer.entity")
 @EnableJpaRepositories(basePackages = "sample.ms.et.customer.service")
-@ComponentScan(basePackages = "sample.ms.et.customer.controller")
-@ComponentScan(basePackages = "sample.ms.et.customer.datasource")
-@ComponentScan(basePackages = "sample.ms.et.customer.service")
+//@ComponentScan(basePackages = "sample.ms.et.customer.controller")
+//@ComponentScan(basePackages = "sample.ms.et.customer.adapter")
+//@ComponentScan(basePackages = "sample.ms.et.customer.service")
 public class StartupApplication {
 
 	public static void main(String[] args) {

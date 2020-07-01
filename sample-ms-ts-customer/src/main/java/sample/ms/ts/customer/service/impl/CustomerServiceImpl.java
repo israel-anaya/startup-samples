@@ -21,9 +21,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.startupframework.service.DataTransferObjectServiceBase;
+import org.startupframework.service.dto.CRUDServiceBase;
 
-import sample.dm.customer.service.client.ETCustomerService;
+import sample.ms.ts.customer.adapter.CustomerAdapter;
 import sample.ms.ts.customer.dto.CustomerDTO;
 import sample.ms.ts.customer.service.CustomerService;
 
@@ -32,42 +32,46 @@ import sample.ms.ts.customer.service.CustomerService;
  * @author Arq. Jesús Israel Anaya Salazar
  */
 @Service
-class CustomerServiceImpl extends DataTransferObjectServiceBase<CustomerDTO> implements CustomerService {
+class CustomerServiceImpl extends CRUDServiceBase<CustomerDTO> implements CustomerService {
 
 	@Autowired
-	ETCustomerService etCustomerService;
-	
-	protected CustomerServiceImpl() {		
+	CustomerAdapter customerAdapter;
+
+	protected CustomerServiceImpl() {
 	}
 
 	@Override
-	protected void onValidateEntity(CustomerDTO item) {
+	protected void onValidateObject(CustomerDTO item) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	@Override
 	protected CustomerDTO onSave(CustomerDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		return customerAdapter.createItem(dto);
 	}
 
 	@Override
 	protected Optional<CustomerDTO> onFindById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<CustomerDTO> result = Optional.of(customerAdapter.getItem(id));
+		return result;
 	}
 
 	@Override
 	protected List<CustomerDTO> onFindAll() {
-		//ResponseEntity<List<CustomerDTO>> buffer = etCustomerService.getAllItems();		
-		return null;//buffer.getBody();
+		return customerAdapter.getAllItems();
 	}
 
 	@Override
 	protected void onDeleteById(String id) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public List<CustomerDTO> findAllActives() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

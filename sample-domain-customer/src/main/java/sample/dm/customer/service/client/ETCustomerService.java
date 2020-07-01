@@ -22,7 +22,8 @@ import org.startupframework.feign.ClientConfiguration;
 
 import sample.dm.customer.dto.CustomerDTO;
 
-@FeignClient(name = "sample-ms-et-customer", path = "/v1.0/customers", configuration = ClientConfiguration.class)
+                                                      
+@FeignClient(name = "sample-ms-et-customer", path = "/v1.0/customers"/*, configuration = ClientConfiguration.class*/)
 public interface ETCustomerService extends CRUDControllerClient<CustomerDTO> {
 
 }

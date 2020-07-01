@@ -20,10 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.startupframework.controller.DataSourceController;
+import org.startupframework.controller.adapter.CRUDControllerBase;
 
 import sample.dm.customer.dto.CustomerDTO;
-import sample.ms.et.customer.datasource.CustomerDataSource;
+import sample.ms.et.customer.adapter.CustomerAdapter;
 
 /**
  *
@@ -32,16 +32,17 @@ import sample.ms.et.customer.datasource.CustomerDataSource;
 @RestController
 @RequestMapping("/v1.0/customers")
 @CrossOrigin(origins = "*")
-class CustomerController extends DataSourceController<CustomerDTO, CustomerDataSource> {
+class CustomerController extends CRUDControllerBase<CustomerDTO, CustomerAdapter> {
 
 	@Autowired
-	protected CustomerController(CustomerDataSource dataSource) {
-		super(dataSource);
+	protected CustomerController(CustomerAdapter adapter) {
+		super(adapter);
 	}
 
 	@Override
 	protected void updateProperties(CustomerDTO source, CustomerDTO target) {
 
+		updateProperty(source::getNumber, target::setNumber);
 		updateProperty(source::getSuffixName, target::setSuffixName);
 		updateProperty(source::getFirstNames, target::setFirstNames);
 		updateProperty(source::getFirstSurname, target::setFirstSurname);
@@ -53,6 +54,7 @@ class CustomerController extends DataSourceController<CustomerDTO, CustomerDataS
 		updateProperty(source::getEmail, target::setEmail);
 		updateProperty(source::getIdNumber, target::setIdNumber);
 		updateProperty(source::getActive, target::setActive);
+		updateProperty(source::getBirthPlace, target::setBirthPlace);
 		
 	}
 }
