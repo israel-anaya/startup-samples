@@ -16,6 +16,8 @@
 
 package sample.dm.customer.dto;
 
+import javax.validation.constraints.Pattern;
+
 import org.startupframework.dto.DataTransferObjectBase;
 
 import lombok.Data;
@@ -29,6 +31,9 @@ public class CustomerIdentityDTO extends DataTransferObjectBase {
 	}
 	
 	private String curp;
+	
+	@Pattern(regexp="^([A-ZÑ\\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Z|\\d]{3})$")	
 	private String rfc;
+	
 	private byte[] ocr;
 }

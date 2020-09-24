@@ -22,10 +22,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Service;
+import org.startupframework.exception.DataNotFoundException;
 import org.startupframework.service.ObjectValidatorService;
 
 import sample.dm.customer.dto.CustomerIdentityDTO;
-import sample.dm.customer.dto.IdentityInfoDTO;
+import sample.dm.customer.dto.CustomerIdentityInfoDTO;
 import sample.ms.mts.customer.identity.service.CustomerIdentityService;
 
 /**
@@ -44,24 +45,38 @@ class CustomerIdentityServiceImpl extends ObjectValidatorService<CustomerIdentit
 
 	@PostConstruct
 	void init() {
-		addIdentity("AASJ790422HDFNLS01", "AASJ790422IBO");
+		addIdentity("AASJ790422HDFNLS01", "AASJ790422IB0");
 
 	}
 
 	private void addIdentity(String curp, String rfc) {
 		curps.add(curp);
-		curps.add(rfc);
+		rfcs.add(rfc);
 	}
 
 	@Override
 	protected void onValidateObject(CustomerIdentityDTO item) {
 		// Validate required or format
+		this.validateObjectConstraints(item);		
 	}
 
 	@Override
-	public IdentityInfoDTO validate(CustomerIdentityDTO dto) {
+	public CustomerIdentityInfoDTO validate(CustomerIdentityDTO dto) {
 		this.onValidateObject(dto);
-		return null;
+
+		if(!curps.contains(dto.getCurp())) {
+			throw DataNotFoundException.from(dto.getCurp());
+		}
+
+		if(!rfcs.contains(dto.getRfc())) {
+			throw DataNotFoundException.from(dto.getRfc());
+		}
+
+		CustomerIdentityInfoDTO result = new CustomerIdentityInfoDTO();
+		result.setCurpStatus("Valid");
+		result.setRfcStatus("Valid");
+		
+		return result;
 	}
 
 }

@@ -23,6 +23,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.startupframework.service.dto.CRUDServiceBase;
 
+import sample.dm.customer.dto.CustomerIdentityDTO;
+import sample.dm.customer.dto.CustomerIdentityInfoDTO;
+import sample.dm.customer.service.client.MTCustomerIdentityService;
 import sample.ms.ts.customer.adapter.CustomerAdapter;
 import sample.ms.ts.customer.dto.CustomerDTO;
 import sample.ms.ts.customer.service.CustomerService;
@@ -36,13 +39,21 @@ class CustomerServiceImpl extends CRUDServiceBase<CustomerDTO> implements Custom
 
 	@Autowired
 	CustomerAdapter customerAdapter;
+	
+	@Autowired
+	MTCustomerIdentityService mtCustomerIdentityService;
 
 	protected CustomerServiceImpl() {
 	}
 
 	@Override
 	protected void onValidateObject(CustomerDTO item) {
-		// TODO Auto-generated method stub
+				
+		CustomerIdentityDTO identity = new CustomerIdentityDTO();
+		identity.setCurp(item.getCurp());
+		identity.setRfc(item.getTaxId());
+		
+		CustomerIdentityInfoDTO buffer = mtCustomerIdentityService.validate(identity);
 
 	}
 
@@ -70,8 +81,7 @@ class CustomerServiceImpl extends CRUDServiceBase<CustomerDTO> implements Custom
 
 	@Override
 	public List<CustomerDTO> findAllActives() {
-		// TODO Auto-generated method stub
-		return null;
+		return customerAdapter.getAllActiveItems();
 	}
 
 }

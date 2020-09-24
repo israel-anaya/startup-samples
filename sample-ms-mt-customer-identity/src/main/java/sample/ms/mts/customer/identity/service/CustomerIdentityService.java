@@ -17,7 +17,7 @@
 package sample.ms.mts.customer.identity.service;
 
 import sample.dm.customer.dto.CustomerIdentityDTO;
-import sample.dm.customer.dto.IdentityInfoDTO;
+import sample.dm.customer.dto.CustomerIdentityInfoDTO;
 
 /**
  *
@@ -25,5 +25,5 @@ import sample.dm.customer.dto.IdentityInfoDTO;
  */
 public interface CustomerIdentityService {
 
-	IdentityInfoDTO validate(CustomerIdentityDTO dto);
+	CustomerIdentityInfoDTO validate(CustomerIdentityDTO dto);
 }

@@ -14,38 +14,21 @@
  * limitations under the License.
  */
 
-package sample.ms.ts.customer.dto;
+package sample.dm.customer.dto;
 
-import java.util.Date;
-
-import org.startupframework.dto.EntityDTO;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import org.startupframework.dto.DataTransferObjectBase;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class CustomerDTO extends EntityDTO {
-	
-	public CustomerDTO() {		
-	}
-	
-	private String number;
-	private String suffixName;
-	private String firstNames;
-	private String firstSurname;
-	private String secondSurname;
-	
-	@JsonFormat(pattern = DATE_PATTERN)
-	private Date birthDate;
+public class CustomerIdentityInfoDTO extends DataTransferObjectBase {
 
-	private String gender;
-	private String curp;	
-	private String taxId;
-	
-	private String birthPlace;
-	private String email;
-	private String idNumber;
+	public CustomerIdentityInfoDTO() {
+	}
+
+	private String curpStatus;
+	private String rfcStatus;
+	private String ocrStatus;
 }
