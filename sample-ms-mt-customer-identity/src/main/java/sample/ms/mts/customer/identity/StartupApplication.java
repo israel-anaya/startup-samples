@@ -21,7 +21,6 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.ComponentScan;
 
 /**
  *
@@ -30,9 +29,6 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableAutoConfiguration
-//@ComponentScan(basePackages = "sample.ms.et.customer.controller")
-//@ComponentScan(basePackages = "sample.ms.et.customer.adapter")
-//@ComponentScan(basePackages = "sample.ms.et.customer.service")
 @EnableFeignClients(basePackages = "sample.dm.customer.service.client")
 public class StartupApplication {
 
