@@ -19,28 +19,28 @@ package sample.ms.mts.customer.identity.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.startupframework.controller.StartupController;
 import org.startupframework.controller.StartupEndpoint;
 
 import lombok.Getter;
 import sample.dm.customer.dto.CustomerIdentityDTO;
-import sample.dm.customer.dto.IdentityInfoDTO;
+import sample.dm.customer.dto.CustomerIdentityInfoDTO;
 import sample.ms.mts.customer.identity.service.CustomerIdentityService;
 
 /**
  *
  * @author Arq. Jesús Israel Anaya Salazar
  */
+@StartupController
 @RestController
 @RequestMapping("/v1.0/customers-identity")
-@CrossOrigin(origins = "*")
 class CustomerIdentityController extends StartupEndpoint { // StartupEndpoint Error Handling for controllers
-
+	
 	@Getter
 	CustomerIdentityService service;
 
@@ -49,11 +49,11 @@ class CustomerIdentityController extends StartupEndpoint { // StartupEndpoint Er
 		this.service = service;
 	}
 
-	@GetMapping
-	public @ResponseBody ResponseEntity<IdentityInfoDTO> getValidate(@RequestBody CustomerIdentityDTO identity) {
+	@PostMapping()
+	public @ResponseBody ResponseEntity<CustomerIdentityInfoDTO> validate(@RequestBody CustomerIdentityDTO identity) {
 		
-		IdentityInfoDTO identityInfo = service.validate(identity);
-
+		CustomerIdentityInfoDTO identityInfo = service.validate(identity);
+		
 		return new ResponseEntity<>(identityInfo, HttpStatus.OK);
 	}
 }
