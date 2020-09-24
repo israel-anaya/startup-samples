@@ -17,9 +17,9 @@
 package sample.ms.et.customer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.startupframework.controller.StartupController;
 import org.startupframework.controller.adapter.CRUDChildControllerBase;
 
 import sample.dm.customer.dto.CustomerAddressDTO;
@@ -29,9 +29,9 @@ import sample.ms.et.customer.adapter.CustomerAddressAdapter;
  *
  * @author Arq. Jesús Israel Anaya Salazar
  */
+@StartupController
 @RestController
 @RequestMapping("/v1.0/customers/{parentId}/addresses")
-@CrossOrigin(origins = "*")
 class CustomerAddressController extends CRUDChildControllerBase<CustomerAddressDTO, CustomerAddressAdapter> {
 
 	@Autowired

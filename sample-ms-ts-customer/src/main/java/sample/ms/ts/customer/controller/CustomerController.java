@@ -42,14 +42,19 @@ class CustomerController extends CRUDControllerBase<CustomerDTO, CustomerService
 	@Override
 	protected void updateProperties(CustomerDTO source, CustomerDTO target) {
 
+		updateProperty(source::getNumber, target::setNumber);
 		updateProperty(source::getSuffixName, target::setSuffixName);
-		updateProperty(source::getFirstName, target::setFirstName);
-		updateProperty(source::getLastName, target::setLastName);
-		updateProperty(source::getMiddleName, target::setMiddleName);
+		updateProperty(source::getFirstNames, target::setFirstNames);
+		updateProperty(source::getFirstSurname, target::setFirstSurname);
+		updateProperty(source::getSecondSurname, target::setSecondSurname);
 		updateProperty(source::getBirthDate, target::setBirthDate);
-		updateProperty(source::getSex, target::setSex);
-		updateProperty(source::getRfc, target::setRfc);
+		updateProperty(source::getGender, target::setGender);
 		updateProperty(source::getCurp, target::setCurp);
+		updateProperty(source::getTaxId, target::setTaxId);
+		updateProperty(source::getEmail, target::setEmail);
+		updateProperty(source::getIdNumber, target::setIdNumber);
+		updateProperty(source::getActive, target::setActive);
+		updateProperty(source::getBirthPlace, target::setBirthPlace);
 
 	}
 }
