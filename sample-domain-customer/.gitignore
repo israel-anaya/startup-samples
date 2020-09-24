@@ -1,12 +1,16 @@
 /target/
-/.classpath
-/.project
-/.settings/
 /.mvn/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
-/mx-ms-cross-security-service_instance.log
