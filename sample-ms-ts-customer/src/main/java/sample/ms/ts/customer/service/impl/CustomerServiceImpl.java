@@ -21,7 +21,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.startupframework.service.dto.CRUDServiceBase;
+import org.startupframework.service.CRUDServiceBase;
 
 import sample.dm.customer.dto.CustomerIdentityDTO;
 import sample.dm.customer.dto.CustomerIdentityInfoDTO;

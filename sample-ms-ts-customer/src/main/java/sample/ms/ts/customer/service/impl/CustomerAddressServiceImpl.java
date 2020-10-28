@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-import org.startupframework.service.dto.CRUDServiceChildBase;
+import org.startupframework.service.CRUDServiceChildBase;
 
 import sample.ms.ts.customer.dto.CustomerAddressDTO;
 import sample.ms.ts.customer.service.CustomerAddressService;
