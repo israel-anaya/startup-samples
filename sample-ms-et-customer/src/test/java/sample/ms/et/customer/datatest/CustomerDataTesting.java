@@ -1,12 +1,13 @@
-package sample.ms.et.customer.service.impl;
+package sample.ms.et.customer.datatest;
 
 import java.util.Date;
 
+import sample.dm.customer.dto.CustomerDTO;
 import sample.ms.et.customer.entity.CustomerEntity;
 import sample.ms.et.customer.entity.GenderType;
 
 public class CustomerDataTesting {
-		
+
 	public static String NUMBER = "0000000010"; // number
 	public static String SUFFIX_NAME = "SR"; // suffixName
 	public static String FIRST_NAMES = "Jesus Israel"; // firstNames
@@ -19,7 +20,7 @@ public class CustomerDataTesting {
 	public static String BIRTH_PLACE = "f4f881f3-76e5-4e9b-a4d6-8f8d5c960735"; // birthPlace
 	public static String EMAIL = "israel.anaya@baas-platform.com"; // email
 	public static String ID_NUMBER = "1234567890"; // idNumber
-	
+
 	public static CustomerEntity createEntity() {
 		CustomerEntity entity = new CustomerEntity();
 		entity.setNumber(NUMBER);
@@ -35,5 +36,22 @@ public class CustomerDataTesting {
 		entity.setEmail(EMAIL);
 		entity.setIdNumber(ID_NUMBER);
 		return entity;
+	}
+
+	public static CustomerDTO createDTO() {
+		CustomerDTO dto = new CustomerDTO();
+		dto.setNumber(NUMBER);
+		dto.setSuffixName(SUFFIX_NAME);
+		dto.setFirstNames(FIRST_NAMES);
+		dto.setFirstSurname(FIRST_SURNAME);
+		dto.setSecondSurname(SECOND_SURNAME);
+		dto.setBirthDate(BIRD_DATE);
+		dto.setGender(GENDER.name());
+		dto.setCurp(CURP);
+		dto.setTaxId(TAX_ID);
+		dto.setBirthPlace(BIRTH_PLACE);
+		dto.setEmail(EMAIL);
+		dto.setIdNumber(ID_NUMBER);
+		return dto;
 	}
 }
