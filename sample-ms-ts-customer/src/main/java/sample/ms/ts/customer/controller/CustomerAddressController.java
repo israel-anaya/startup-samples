@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.startupframework.controller.service.CRUDChildControllerBase;
+import org.startupframework.controller.feign.CRUDControllerChildBase;
 
 import sample.ms.ts.customer.dto.CustomerAddressDTO;
 import sample.ms.ts.customer.service.CustomerAddressService;
@@ -32,7 +32,7 @@ import sample.ms.ts.customer.service.CustomerAddressService;
 @RestController
 @RequestMapping("/v1.0/customers/{parentId}/addresses")
 @CrossOrigin(origins = "*")
-class CustomerAddressController extends CRUDChildControllerBase<CustomerAddressDTO, CustomerAddressService> {
+class CustomerAddressController extends CRUDControllerChildBase<CustomerAddressDTO, CustomerAddressService> {
 
 	@Autowired
 	protected CustomerAddressController(CustomerAddressService service) {

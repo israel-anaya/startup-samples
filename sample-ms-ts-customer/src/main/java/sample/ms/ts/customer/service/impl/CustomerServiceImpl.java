@@ -16,17 +16,17 @@
 
 package sample.ms.ts.customer.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.startupframework.service.CRUDServiceBase;
+import org.startupframework.dto.DTOConverter;
+import org.startupframework.feign.service.CRUDFeignService;
 
 import sample.dm.customer.dto.CustomerIdentityDTO;
 import sample.dm.customer.dto.CustomerIdentityInfoDTO;
-import sample.dm.customer.service.client.MTCustomerIdentityService;
-import sample.ms.ts.customer.adapter.CustomerAdapter;
+import sample.dm.customer.service.feign.ETCustomerService;
+import sample.dm.customer.service.feign.MTCustomerIdentityService;
 import sample.ms.ts.customer.dto.CustomerDTO;
 import sample.ms.ts.customer.service.CustomerService;
 
@@ -35,53 +35,33 @@ import sample.ms.ts.customer.service.CustomerService;
  * @author Arq. Jesús Israel Anaya Salazar
  */
 @Service
-class CustomerServiceImpl extends CRUDServiceBase<CustomerDTO> implements CustomerService {
+class CustomerServiceImpl
+		extends CRUDFeignService<sample.dm.customer.dto.CustomerDTO, CustomerDTO, ETCustomerService>
+		implements CustomerService {
 
-	@Autowired
-	CustomerAdapter customerAdapter;
-	
+	@Mapper
+	public interface Converter extends DTOConverter<sample.dm.customer.dto.CustomerDTO, CustomerDTO> {
+		static final Converter INSTANCE = Mappers.getMapper(Converter.class);
+
+	}
+
 	@Autowired
 	MTCustomerIdentityService mtCustomerIdentityService;
 
-	protected CustomerServiceImpl() {
+	@Autowired
+	protected CustomerServiceImpl(final ETCustomerService feign) {
+		super(feign, Converter.INSTANCE);
 	}
 
 	@Override
 	protected void onValidateObject(CustomerDTO item) {
-				
+
 		CustomerIdentityDTO identity = new CustomerIdentityDTO();
 		identity.setCurp(item.getCurp());
 		identity.setRfc(item.getTaxId());
-		
+
 		CustomerIdentityInfoDTO buffer = mtCustomerIdentityService.validate(identity);
 
-	}
-
-	@Override
-	protected CustomerDTO onSave(CustomerDTO dto) {
-		return customerAdapter.createItem(dto);
-	}
-
-	@Override
-	protected Optional<CustomerDTO> onFindById(String id) {
-		Optional<CustomerDTO> result = Optional.of(customerAdapter.getItem(id));
-		return result;
-	}
-
-	@Override
-	protected List<CustomerDTO> onFindAll() {
-		return customerAdapter.getAllItems();
-	}
-
-	@Override
-	protected void onDeleteById(String id) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public List<CustomerDTO> findAllActives() {
-		return customerAdapter.getAllActiveItems();
 	}
 
 }

@@ -21,7 +21,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.startupframework.data.adapter.entity.EntityServiceChildAdapter;
+import org.startupframework.data.adapter.EntityServiceAdapterChild;
 import org.startupframework.data.entity.DataConverter;
 
 import sample.dm.customer.dto.CustomerAddressDTO;
@@ -30,7 +30,7 @@ import sample.ms.et.customer.service.CustomerAddressService;
 
 @Service
 public class CustomerAddressAdapter
-		extends EntityServiceChildAdapter<CustomerAddressDTO, CustomerAddressEntity, CustomerAddressService> {
+		extends EntityServiceAdapterChild<CustomerAddressDTO, CustomerAddressEntity, CustomerAddressService> {
 
 	@Mapper
 	public interface Converter extends DataConverter<CustomerAddressDTO, CustomerAddressEntity> {

@@ -16,7 +16,7 @@
 
 package sample.ms.ts.customer.service;
 
-import org.startupframework.service.CRUDService;
+import org.startupframework.feign.CRUDFeign;
 
 import sample.ms.ts.customer.dto.CustomerDTO;
 
@@ -24,7 +24,7 @@ import sample.ms.ts.customer.dto.CustomerDTO;
  *
  * @author Arq. Jesús Israel Anaya Salazar
  */
-public interface CustomerService extends CRUDService<CustomerDTO> {
+public interface CustomerService extends CRUDFeign<CustomerDTO> {
 
 
 }

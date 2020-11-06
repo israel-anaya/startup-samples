@@ -16,57 +16,37 @@
 
 package sample.ms.ts.customer.service.impl;
 
-import java.util.List;
-import java.util.Optional;
-
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.startupframework.service.CRUDServiceChildBase;
+import org.startupframework.dto.DTOConverter;
+import org.startupframework.feign.service.CRUDFeignServiceChild;
 
+import sample.dm.customer.service.feign.ETCustomerAddressService;
 import sample.ms.ts.customer.dto.CustomerAddressDTO;
 import sample.ms.ts.customer.service.CustomerAddressService;
 
-/**
- *
- * @author Arq. Jesús Israel Anaya Salazar
- */
 @Service
-class CustomerAddressServiceImpl extends CRUDServiceChildBase<CustomerAddressDTO>
+public class CustomerAddressServiceImpl extends
+		CRUDFeignServiceChild<sample.dm.customer.dto.CustomerAddressDTO, CustomerAddressDTO, ETCustomerAddressService>
 		implements CustomerAddressService {
 
-	protected CustomerAddressServiceImpl() {
-		super(true);
+	@Mapper
+	public interface Converter extends DTOConverter<sample.dm.customer.dto.CustomerAddressDTO, CustomerAddressDTO> {
+		static final Converter INSTANCE = Mappers.getMapper(Converter.class);
+
+	}
+
+	@Autowired
+	protected CustomerAddressServiceImpl(final ETCustomerAddressService feign) {
+		super(feign, Converter.INSTANCE);
 	}
 
 	@Override
-	protected void onValidateObject(CustomerAddressDTO item) {
+	protected void onValidateObject(CustomerAddressDTO dto) {
 		// TODO Auto-generated method stub
 
 	}
-	
-	@Override
-	protected CustomerAddressDTO onSave(String parentId, String childId, CustomerAddressDTO dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected List<CustomerAddressDTO> onFindAll(String parentId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected Optional<CustomerAddressDTO> onFindById(String parentId, String childId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected void onDeleteById(String parentId, String childId) {
-		// TODO Auto-generated method stub
-
-	}
-
-
 
 }
