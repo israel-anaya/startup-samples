@@ -17,12 +17,12 @@
 package sample.dm.user.service.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.startupframework.controller.CRUDControllerClient;
+import org.startupframework.feign.CRUDFeign;
 import org.startupframework.feign.StartupClientConfig;
 
 import sample.dm.user.dto.ClientDTO;
                                                       
 @FeignClient(name = "sample-ms-et-user", path = "/v1.0/clients", configuration = StartupClientConfig.class)
-public interface ETClientService extends CRUDControllerClient<ClientDTO> {
+public interface ETClientService extends CRUDFeign<ClientDTO> {
 
 }

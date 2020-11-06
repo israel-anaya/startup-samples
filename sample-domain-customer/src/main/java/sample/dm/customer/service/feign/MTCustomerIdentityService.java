@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package sample.dm.user.service.client;
+package sample.dm.customer.service.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.startupframework.feign.CRUDFeign;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.startupframework.feign.StartupClientConfig;
 
-import sample.dm.user.dto.UserDTO;
+import sample.dm.customer.dto.CustomerIdentityDTO;
+import sample.dm.customer.dto.CustomerIdentityInfoDTO;
 
-                                                      
-@FeignClient(name = "sample-ms-et-user", path = "/v1.0/users", configuration = StartupClientConfig.class)
-public interface ETUserService extends CRUDFeign<UserDTO> {
+@FeignClient(name = "sample-ms-mt-customer-identity", path = "/v1.0/customers-identity", configuration = StartupClientConfig.class)
+public interface MTCustomerIdentityService {
 
+	@PostMapping()
+	CustomerIdentityInfoDTO validate(CustomerIdentityDTO identity);
 }

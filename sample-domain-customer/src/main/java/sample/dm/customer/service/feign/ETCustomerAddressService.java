@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-package sample.dm.user.service.client;
+package sample.dm.customer.service.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.startupframework.feign.CRUDFeign;
+import org.startupframework.feign.CRUDFeignChild;
 import org.startupframework.feign.StartupClientConfig;
 
-import sample.dm.user.dto.UserDTO;
+import sample.dm.customer.dto.CustomerAddressDTO;
 
-                                                      
-@FeignClient(name = "sample-ms-et-user", path = "/v1.0/users", configuration = StartupClientConfig.class)
-public interface ETUserService extends CRUDFeign<UserDTO> {
+@FeignClient(contextId = "etCustomerAddress", name = "sample-ms-et-customer", path = "/v1.0/customers/{parentId}/addresses", configuration = StartupClientConfig.class)
+public interface ETCustomerAddressService extends CRUDFeignChild<CustomerAddressDTO> {
 
 }
