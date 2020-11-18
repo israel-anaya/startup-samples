@@ -47,7 +47,7 @@ class CustomerAPITest extends APITest {
 
 		Response response;
 		response = given().spec(requestSpecification).when().post("/v1.0/customers");
-		response.then().statusCode(HttpStatus.CREATED.value());
+		response.then().statusCode(HttpStatus.CREATED.value()).log().all();
 
 		customerId = response.path("id");
 		CustomerDTO actualCustomer = response.as(CustomerDTO.class);

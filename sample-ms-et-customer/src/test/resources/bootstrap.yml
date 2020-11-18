@@ -33,6 +33,7 @@ management:
     enabled-by-default: false
 eureka:  client:    enabled: false
 logging:
+  config: ""
   level:    
     root: INFO
     #org.springframework.security: TRACE
