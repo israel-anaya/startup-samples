@@ -29,7 +29,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableEurekaClient
 @EnableAutoConfiguration
-@EnableFeignClients(basePackages = "sample.dm.customer.service.client")
+@EnableFeignClients(basePackages = "sample.dm.customer.service.feign")
 public class StartupApplication {
 
 	public static void main(String[] args) {
