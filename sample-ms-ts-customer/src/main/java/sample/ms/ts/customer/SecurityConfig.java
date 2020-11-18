@@ -1,11 +1,15 @@
 package sample.ms.ts.customer;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.startupframework.security.CustomizerAntMatchers;
 import org.startupframework.security.StartupSecurityConfig;
 
 @Configuration
+@EnableWebSecurity
+@Profile(value = { "local", "dev", "qa", "uat", "prod" })
 public class SecurityConfig extends StartupSecurityConfig {
 
 	@Override
