@@ -22,7 +22,7 @@ import org.startupframework.feign.StartupClientConfig;
 
 import sample.dm.customer.dto.CustomerAddressDTO;
 
-@FeignClient(contextId = "etCustomerAddress", name = "sample-ms-et-customer", path = "/v1.0/customers/{parentId}/addresses", configuration = StartupClientConfig.class)
+@FeignClient(contextId = "etCustomerAddress", name = "sample-ms-et-customer", path = "/v1.0/customers/{parentId}/addresses", configuration = StartupClientConfig.class, primary = false)
 public interface ETCustomerAddressService extends CRUDFeignChild<CustomerAddressDTO> {
 
 }
