@@ -1,0 +1,41 @@
+spring:
+  profiles:    active: test
+  application:
+    name: sample-ms-et-customer
+  cloud:    config:
+      enabled: false
+    discovery:      enabled: false      
+  datasource:
+    url: jdbc:hsqldb:mem:customersdb;DB_CLOSE_DELAY=-1
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+    username: SA
+    password: 
+  jpa:
+    database-platform: org.hibernate.dialect.HSQLDialect
+    generate-ddl: true
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:           
+      hibernate.event.merge.entity_copy_observer: allow
+      javax.persistence.validation.mode: none
+      hibernate.globally_quoted_identifiers: true
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+    - org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration
+    - org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+    - org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration
+management:
+  endpoints:
+    enabled-by-default: false
+eureka:  client:    enabled: false
+logging:
+  config: ""
+  level:    
+    root: INFO
+    #org.springframework.security: TRACE
+
+    
