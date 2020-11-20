@@ -16,13 +16,33 @@
 
 package sample.dm.customer.service.feign;
 
+import java.util.List;
+
 import org.springframework.cloud.openfeign.FeignClient;
-import org.startupframework.feign.CRUDFeign;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.startupframework.feign.StartupClientConfig;
 
 import sample.dm.customer.dto.CustomerDTO;
 
 @FeignClient(contextId = "etCustomer", name = "sample-ms-et-customer", path = "/v1.0/customers", configuration = StartupClientConfig.class, primary = false)
-public interface ETCustomerService extends CRUDFeign<CustomerDTO> {
+public interface ETCustomerService {
 
+	@GetMapping()
+	List<CustomerDTO> getAllItems();
+	
+	@GetMapping("/{id}")
+	CustomerDTO getItem(@PathVariable("id") String id);
+
+	@PostMapping()
+	CustomerDTO createItem(CustomerDTO item);
+
+	@PutMapping()
+	CustomerDTO updateItem(CustomerDTO item);
+	
+	@DeleteMapping("/{id}")
+	CustomerDTO deleteItem(@PathVariable("id") String id);
 }

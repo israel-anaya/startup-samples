@@ -28,8 +28,7 @@ public class CustomerAddressDTO extends EntityChildDTO {
 	public CustomerAddressDTO() {		
 	}	
 		
-	private String type;
-	
+	private String type;	
 	private String street;
 	private String streetNumber;
 	private String neighborhood;

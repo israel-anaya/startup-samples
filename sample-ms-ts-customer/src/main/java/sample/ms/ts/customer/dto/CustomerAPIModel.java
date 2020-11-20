@@ -27,24 +27,24 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class CustomerDTO extends EntityDTO {
-	
-	public CustomerDTO() {		
+public class CustomerAPIModel extends EntityDTO {
+
+	public CustomerAPIModel() {
 	}
-	
+
 	private String number;
 	private String suffixName;
 	private String firstNames;
 	private String firstSurname;
 	private String secondSurname;
-	
+
 	@JsonFormat(pattern = DATE_PATTERN)
 	private Date birthDate;
 
 	private String gender;
-	private String curp;	
+	private String curp;
 	private String taxId;
-	
+
 	private String birthPlace;
 	private String email;
 	private String idNumber;

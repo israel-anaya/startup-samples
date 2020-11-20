@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.startupframework.controller.StartupController;
-import org.startupframework.controller.adapter.CRUDControllerBase;
+import org.startupframework.controller.service.CRUDControllerBase;
 
 import sample.dm.user.dto.ClientDTO;
 import sample.ms.et.user.adapter.ClientAdapter;

@@ -16,7 +16,7 @@
 
 package sample.ms.et.customer.service;
 
-import org.startupframework.data.service.EntityServiceChild;
+import org.startupframework.data.service.EntityChildService;
 
 import sample.ms.et.customer.entity.CustomerAddressEntity;
 
@@ -24,6 +24,6 @@ import sample.ms.et.customer.entity.CustomerAddressEntity;
  *
  * @author Arq. Jesús Israel Anaya Salazar
  */
-public interface CustomerAddressService extends EntityServiceChild<CustomerAddressEntity> {
+public interface CustomerAddressService extends EntityChildService<CustomerAddressEntity> {
 
 }

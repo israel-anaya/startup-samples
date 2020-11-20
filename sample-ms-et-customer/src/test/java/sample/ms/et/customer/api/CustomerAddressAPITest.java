@@ -87,7 +87,7 @@ class CustomerAddressAPITest extends APITest {
 		requestSpecification.body(updateCustomerAddress);
 
 		Response response;
-		response = given().spec(requestSpecification).when().patch("/v1.0/customers/{customerId}/addresses");
+		response = given().spec(requestSpecification).when().put("/v1.0/customers/{customerId}/addresses");
 		response.then().statusCode(HttpStatus.OK.value());
 
 		CustomerAddressDTO actualCustomerAddress = response.as(CustomerAddressDTO.class);

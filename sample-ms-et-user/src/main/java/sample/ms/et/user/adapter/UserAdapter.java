@@ -20,7 +20,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.startupframework.data.adapter.EntityServiceAdapter;
+import org.startupframework.data.adapter.CRUDAdapter;
 import org.startupframework.data.entity.DataConverter;
 
 import sample.dm.user.dto.UserDTO;
@@ -28,7 +28,7 @@ import sample.ms.et.user.entity.UserEntity;
 import sample.ms.et.user.service.UserService;
 
 @Service
-public class UserAdapter extends EntityServiceAdapter<UserDTO, UserEntity, UserService> {
+public class UserAdapter extends CRUDAdapter<UserDTO, UserEntity, UserService> {
 
 	@Mapper
 	public interface Converter extends DataConverter<UserDTO, UserEntity> {

@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.startupframework.controller.StartupController;
-import org.startupframework.controller.adapter.CRUDControllerChildBase;
+import org.startupframework.controller.service.CRUDChildControllerBase;
 
 import sample.dm.customer.dto.CustomerAddressDTO;
 import sample.ms.et.customer.adapter.CustomerAddressAdapter;
@@ -32,7 +32,7 @@ import sample.ms.et.customer.adapter.CustomerAddressAdapter;
 @StartupController
 @RestController
 @RequestMapping("/v1.0/customers/{parentId}/addresses")
-class CustomerAddressController extends CRUDControllerChildBase<CustomerAddressDTO, CustomerAddressAdapter> {
+class CustomerAddressController extends CRUDChildControllerBase<CustomerAddressDTO, CustomerAddressAdapter> {
 
 	@Autowired
 	protected CustomerAddressController(CustomerAddressAdapter adapter) {

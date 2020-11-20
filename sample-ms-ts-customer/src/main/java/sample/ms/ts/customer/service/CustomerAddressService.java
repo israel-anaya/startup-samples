@@ -16,14 +16,14 @@
 
 package sample.ms.ts.customer.service;
 
-import org.startupframework.feign.CRUDFeignChild;
+import org.startupframework.service.feign.CRUDChildFeign;
 
-import sample.ms.ts.customer.dto.CustomerAddressDTO;
+import sample.ms.ts.customer.dto.CustomerAddressAPIModel;
 
 /**
  *
  * @author Arq. Jesús Israel Anaya Salazar
  */
-public interface CustomerAddressService extends CRUDFeignChild<CustomerAddressDTO> {
+public interface CustomerAddressService extends CRUDChildFeign<CustomerAddressAPIModel> {
 
 }

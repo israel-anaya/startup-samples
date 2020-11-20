@@ -28,7 +28,7 @@ import io.restassured.specification.RequestSpecification;
 import sample.dm.customer.dto.CustomerIdentityInfoDTO;
 import sample.dm.customer.service.feign.ETCustomerService;
 import sample.dm.customer.service.feign.MTCustomerIdentityService;
-import sample.ms.ts.customer.dto.CustomerDTO;
+import sample.ms.ts.customer.dto.CustomerAPIModel;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(OrderAnnotation.class)
@@ -36,8 +36,8 @@ class CustomerAPITest extends APITest {
 
 	static ObjectMapper objectMapper = new ObjectMapper();
 	static String customerId;
-	static CustomerDTO newCustomer;
-	static CustomerDTO updateCustomer;
+	static CustomerAPIModel newCustomer;
+	static CustomerAPIModel updateCustomer;
 
 	@MockBean
 	MTCustomerIdentityService mtCustomerIdentityService;
@@ -52,7 +52,7 @@ class CustomerAPITest extends APITest {
 		}
 	}
 
-	void assertObject(CustomerDTO expected, CustomerDTO actual) {
+	void assertObject(CustomerAPIModel expected, CustomerAPIModel actual) {
 		assertProperty(expected::getNumber, actual::getNumber);
 		assertProperty(expected::getSuffixName, actual::getSuffixName);
 		assertProperty(expected::getFirstNames, actual::getFirstNames);
@@ -76,8 +76,8 @@ class CustomerAPITest extends APITest {
 
 	@BeforeAll
 	static void initData() throws IOException {
-		newCustomer = readValue("ts-customer-create.json", CustomerDTO.class);
-		updateCustomer = readValue("ts-customer-update.json", CustomerDTO.class);
+		newCustomer = readValue("ts-customer-create.json", CustomerAPIModel.class);
+		updateCustomer = readValue("ts-customer-update.json", CustomerAPIModel.class);
 
 	}
 
@@ -97,7 +97,7 @@ class CustomerAPITest extends APITest {
 		response.then().statusCode(HttpStatus.CREATED.value());
 
 		customerId = response.path("id");
-		CustomerDTO actualCustomer = response.as(CustomerDTO.class);
+		CustomerAPIModel actualCustomer = response.as(CustomerAPIModel.class);
 		assertObject(newCustomer, actualCustomer);
 
 	}
@@ -110,10 +110,10 @@ class CustomerAPITest extends APITest {
 		requestSpecification.body(updateCustomer);
 
 		Response response;
-		response = given().spec(requestSpecification).when().patch("/v1.0/customers");
+		response = given().spec(requestSpecification).when().put("/v1.0/customers");
 		response.then().statusCode(HttpStatus.OK.value());
 
-		CustomerDTO actualCustomer = response.as(CustomerDTO.class);
+		CustomerAPIModel actualCustomer = response.as(CustomerAPIModel.class);
 		assertObject(updateCustomer, actualCustomer);
 
 	}

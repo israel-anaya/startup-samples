@@ -21,13 +21,13 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.startupframework.dto.DTOConverter;
-import org.startupframework.feign.service.CRUDFeignService;
+import org.startupframework.service.feign.CRUDFeignBase;
 
+import sample.dm.customer.dto.CustomerDTO;
 import sample.dm.customer.dto.CustomerIdentityDTO;
 import sample.dm.customer.dto.CustomerIdentityInfoDTO;
-import sample.dm.customer.service.feign.ETCustomerService;
 import sample.dm.customer.service.feign.MTCustomerIdentityService;
-import sample.ms.ts.customer.dto.CustomerDTO;
+import sample.ms.ts.customer.dto.CustomerAPIModel;
 import sample.ms.ts.customer.service.CustomerService;
 
 /**
@@ -35,12 +35,10 @@ import sample.ms.ts.customer.service.CustomerService;
  * @author Arq. Jesús Israel Anaya Salazar
  */
 @Service
-class CustomerServiceImpl
-		extends CRUDFeignService<sample.dm.customer.dto.CustomerDTO, CustomerDTO, ETCustomerService>
-		implements CustomerService {
+class CustomerServiceImpl extends CRUDFeignBase<CustomerDTO, CustomerAPIModel> implements CustomerService {
 
 	@Mapper
-	public interface Converter extends DTOConverter<sample.dm.customer.dto.CustomerDTO, CustomerDTO> {
+	public interface Converter extends DTOConverter<CustomerDTO, CustomerAPIModel> {
 		static final Converter INSTANCE = Mappers.getMapper(Converter.class);
 
 	}
@@ -49,12 +47,12 @@ class CustomerServiceImpl
 	MTCustomerIdentityService mtCustomerIdentityService;
 
 	@Autowired
-	protected CustomerServiceImpl(final ETCustomerService feign) {
+	protected CustomerServiceImpl(final CustomerFeignAdapter feign) {
 		super(feign, Converter.INSTANCE);
 	}
 
 	@Override
-	protected void onValidateObject(CustomerDTO item) {
+	protected void onValidateObject(CustomerAPIModel item) {
 
 		CustomerIdentityDTO identity = new CustomerIdentityDTO();
 		identity.setCurp(item.getCurp());

@@ -17,34 +17,43 @@
 package sample.ms.ts.customer.service.impl;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.startupframework.dto.DTOConverter;
-import org.startupframework.feign.service.CRUDFeignServiceChild;
+import org.startupframework.service.feign.CRUDChildFeignBase;
 
-import sample.dm.customer.service.feign.ETCustomerAddressService;
-import sample.ms.ts.customer.dto.CustomerAddressDTO;
+import sample.dm.customer.dto.CustomerAddressDTO;
+import sample.ms.ts.customer.dto.CustomerAddressAPIModel;
 import sample.ms.ts.customer.service.CustomerAddressService;
 
 @Service
-public class CustomerAddressServiceImpl extends
-		CRUDFeignServiceChild<sample.dm.customer.dto.CustomerAddressDTO, CustomerAddressDTO, ETCustomerAddressService>
+class CustomerAddressServiceImpl extends CRUDChildFeignBase<CustomerAddressDTO, CustomerAddressAPIModel>
 		implements CustomerAddressService {
 
 	@Mapper
-	public interface Converter extends DTOConverter<sample.dm.customer.dto.CustomerAddressDTO, CustomerAddressDTO> {
+	public interface Converter extends DTOConverter<CustomerAddressDTO, CustomerAddressAPIModel> {
 		static final Converter INSTANCE = Mappers.getMapper(Converter.class);
 
+		@Override
+		@Mapping(target = "type", constant = "Legal")
+		@Mapping(target = "town", source = "municipality")
+		CustomerAddressDTO toSource(CustomerAddressAPIModel target);
+		
+		@Override
+		@Mapping(target = "municipality", source = "town")
+		CustomerAddressAPIModel toTarget(CustomerAddressDTO source);
+		
 	}
 
 	@Autowired
-	protected CustomerAddressServiceImpl(final ETCustomerAddressService feign) {
+	protected CustomerAddressServiceImpl(final CustomerAddressFeignAdapter feign) {
 		super(feign, Converter.INSTANCE);
 	}
 
 	@Override
-	protected void onValidateObject(CustomerAddressDTO dto) {
+	protected void onValidateObject(CustomerAddressAPIModel dto) {
 		// TODO Auto-generated method stub
 
 	}

@@ -17,8 +17,8 @@
 package sample.dm.user.service.client;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.startupframework.feign.CRUDFeign;
 import org.startupframework.feign.StartupClientConfig;
+import org.startupframework.service.feign.CRUDFeign;
 
 import sample.dm.user.dto.UserDTO;
 

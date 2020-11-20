@@ -21,7 +21,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.startupframework.data.service.EntityServiceChildBase;
+import org.startupframework.data.service.EntityChildServiceBase;
 import org.startupframework.exception.DataNotFoundException;
 
 import sample.ms.et.customer.entity.CustomerAddressEntity;
@@ -33,7 +33,7 @@ import sample.ms.et.customer.service.CustomerAddressService;
  * @author Arq. Jesús Israel Anaya Salazar
  */
 @Service
-class CustomerAddressServiceImpl extends EntityServiceChildBase<CustomerAddressRepository, CustomerAddressEntity>
+class CustomerAddressServiceImpl extends EntityChildServiceBase<CustomerAddressRepository, CustomerAddressEntity>
 		implements CustomerAddressService {
 
 	@Autowired

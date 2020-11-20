@@ -17,22 +17,22 @@
 package sample.ms.ts.customer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.startupframework.controller.StartupController;
 import org.startupframework.controller.feign.CRUDControllerBase;
 
-import sample.ms.ts.customer.dto.CustomerDTO;
+import sample.ms.ts.customer.dto.CustomerAPIModel;
 import sample.ms.ts.customer.service.CustomerService;
 
 /**
  *
  * @author Arq. Jesús Israel Anaya Salazar
  */
+@StartupController
 @RestController
 @RequestMapping("/v1.0/customers")
-@CrossOrigin(origins = "*")
-class CustomerController extends CRUDControllerBase<CustomerDTO, CustomerService> {
+class CustomerController extends CRUDControllerBase<CustomerAPIModel, CustomerService> {
 
 	@Autowired
 	protected CustomerController(CustomerService service) {
@@ -40,7 +40,7 @@ class CustomerController extends CRUDControllerBase<CustomerDTO, CustomerService
 	}
 
 	@Override
-	protected void updateProperties(CustomerDTO source, CustomerDTO target) {
+	protected void updateProperties(CustomerAPIModel source, CustomerAPIModel target) {
 
 		updateProperty(source::getNumber, target::setNumber);
 		updateProperty(source::getSuffixName, target::setSuffixName);

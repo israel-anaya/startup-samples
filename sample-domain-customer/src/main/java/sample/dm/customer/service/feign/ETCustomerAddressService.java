@@ -16,13 +16,33 @@
 
 package sample.dm.customer.service.feign;
 
+import java.util.List;
+
 import org.springframework.cloud.openfeign.FeignClient;
-import org.startupframework.feign.CRUDFeignChild;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.startupframework.feign.StartupClientConfig;
 
 import sample.dm.customer.dto.CustomerAddressDTO;
 
-@FeignClient(contextId = "etCustomerAddress", name = "sample-ms-et-customer", path = "/v1.0/customers/{parentId}/addresses", configuration = StartupClientConfig.class, primary = false)
-public interface ETCustomerAddressService extends CRUDFeignChild<CustomerAddressDTO> {
+@FeignClient(contextId = "etCustomerAddress", name = "sample-ms-et-customer", path = "/v1.0/customers", configuration = StartupClientConfig.class, primary = false)
+public interface ETCustomerAddressService {
 
+	@GetMapping("/{parentId}/addresses")
+	List<CustomerAddressDTO> getAllItems(@PathVariable("parentId") String parentId);
+
+	@GetMapping("/{parentId}/addresses/{childId}")
+	CustomerAddressDTO getItem(@PathVariable("parentId") String parentId, @PathVariable("childId") String childId);
+
+	@PostMapping("/{parentId}/addresses")
+	CustomerAddressDTO createItem(@PathVariable("parentId") String parentId, CustomerAddressDTO item);
+
+	@PutMapping("/{parentId}/addresses")
+	CustomerAddressDTO updateItem(@PathVariable("parentId") String parentId, CustomerAddressDTO item);
+
+	@DeleteMapping("/{parentId}/addresses/{childId}")
+	CustomerAddressDTO deleteItem(@PathVariable("parentId") String parentId, @PathVariable("childId") String childId);
 }

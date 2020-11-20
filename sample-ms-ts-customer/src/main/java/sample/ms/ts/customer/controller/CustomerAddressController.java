@@ -17,22 +17,22 @@
 package sample.ms.ts.customer.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.startupframework.controller.feign.CRUDControllerChildBase;
+import org.startupframework.controller.StartupController;
+import org.startupframework.controller.feign.CRUDChildControllerBase;
 
-import sample.ms.ts.customer.dto.CustomerAddressDTO;
+import sample.ms.ts.customer.dto.CustomerAddressAPIModel;
 import sample.ms.ts.customer.service.CustomerAddressService;
 
 /**
  *
  * @author Arq. Jesús Israel Anaya Salazar
  */
+@StartupController
 @RestController
 @RequestMapping("/v1.0/customers/{parentId}/addresses")
-@CrossOrigin(origins = "*")
-class CustomerAddressController extends CRUDControllerChildBase<CustomerAddressDTO, CustomerAddressService> {
+class CustomerAddressController extends CRUDChildControllerBase<CustomerAddressAPIModel, CustomerAddressService> {
 
 	@Autowired
 	protected CustomerAddressController(CustomerAddressService service) {
@@ -40,15 +40,18 @@ class CustomerAddressController extends CRUDControllerChildBase<CustomerAddressD
 	}
 
 	@Override
-	protected void updateProperties(CustomerAddressDTO source, CustomerAddressDTO target) {
-
-		updateProperty(source::getType, target::setType);
+	protected void updateProperties(CustomerAddressAPIModel source, CustomerAddressAPIModel target) {
+		
 		updateProperty(source::getStreet, target::setStreet);
+		updateProperty(source::getStreetNumber, target::setStreetNumber);
+		updateProperty(source::getNeighborhood, target::setNeighborhood);
+		updateProperty(source::getMunicipality, target::setMunicipality);
 		updateProperty(source::getCity, target::setCity);
-		updateProperty(source::getCountry, target::setCountry);
 		updateProperty(source::getState, target::setState);
 		updateProperty(source::getZipCode, target::setZipCode);
+		updateProperty(source::getCountry, target::setCountry);
 		updateProperty(source::getActive, target::setActive);
 
 	}
+
 }

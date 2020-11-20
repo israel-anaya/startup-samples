@@ -17,26 +17,26 @@
 package sample.ms.ts.customer.dto;
 
 import org.startupframework.dto.DataTransferObjectChild;
-import org.startupframework.dto.EntityDTO;
+import org.startupframework.dto.EntityChildDTO;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class CustomerAddressDTO extends EntityDTO implements DataTransferObjectChild {
-	
-	public CustomerAddressDTO() {		
-	}	
-	
-	private String childId;
-	
-	private String type;
-	
+public class CustomerAddressAPIModel extends EntityChildDTO implements DataTransferObjectChild {
+
+	public CustomerAddressAPIModel() {
+	}
+
+	//private String type; // API support one address type
 	private String street;
+	private String streetNumber;
+	private String neighborhood;
+	private String municipality; // API support other name for town
 	private String city;
-	private String country;
 	private String state;
 	private String zipCode;
+	private String country; 
 
 }

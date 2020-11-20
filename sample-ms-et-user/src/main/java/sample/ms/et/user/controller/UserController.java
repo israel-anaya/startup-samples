@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.startupframework.controller.StartupController;
-import org.startupframework.controller.adapter.CRUDControllerBase;
+import org.startupframework.controller.service.CRUDControllerBase;
 
 import sample.dm.user.dto.UserDTO;
 import sample.ms.et.user.adapter.UserAdapter;

@@ -47,7 +47,7 @@ class CustomerAPITest extends APITest {
 
 		Response response;
 		response = given().spec(requestSpecification).when().post("/v1.0/customers");
-		response.then().statusCode(HttpStatus.CREATED.value()).log().all();
+		response.then().statusCode(HttpStatus.CREATED.value());
 
 		customerId = response.path("id");
 		CustomerDTO actualCustomer = response.as(CustomerDTO.class);
@@ -67,7 +67,7 @@ class CustomerAPITest extends APITest {
 		requestSpecification.body(updateCustomer);
 
 		Response response;
-		response = given().spec(requestSpecification).when().patch("/v1.0/customers");
+		response = given().spec(requestSpecification).when().put("/v1.0/customers");
 		response.then().statusCode(HttpStatus.OK.value());
 		
 		CustomerDTO actualCustomer = response.as(CustomerDTO.class);
