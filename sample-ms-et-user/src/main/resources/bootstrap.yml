@@ -1,12 +1,0 @@
-spring:
-  cloud:    config:
-      name: sample-ms-et-user
-      discovery:        service-id: startup-msa-config-server-${spring.profiles.active}
-        enabled: true          profiles:    active: local
-eureka:
-  instance:
-    preferIpAddress: true
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-
