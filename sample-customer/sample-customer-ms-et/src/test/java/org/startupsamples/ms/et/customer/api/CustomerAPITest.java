@@ -2,7 +2,10 @@ package org.startupsamples.ms.et.customer.api;
 
 import static io.restassured.RestAssured.given;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -10,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.startupsamples.dm.customer.def.CustomerDef;
 import org.startupsamples.dm.customer.dto.CustomerDTO;
-import org.startupsamples.ms.et.customer.datatest.CustomerDataTesting;
 
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -19,8 +21,10 @@ import io.restassured.specification.RequestSpecification;
 @TestMethodOrder(OrderAnnotation.class)
 class CustomerAPITest extends APITest {
 
-	static String customerId;
-
+	static String itemId;
+	static CustomerDTO newItem;
+	static CustomerDTO updateItem;
+	
 	void assertObject(CustomerDTO expected, CustomerDTO actual) {
 		assertProperty(expected::getNumber, actual::getNumber);
 		assertProperty(expected::getSuffixName, actual::getSuffixName);
@@ -37,22 +41,26 @@ class CustomerAPITest extends APITest {
 		assertProperty(expected::getBirthPlace, actual::getBirthPlace);
 	}
 
+	@BeforeAll
+	static void initData() throws IOException {
+		newItem = readValue("customer-create.json", CustomerDTO.class);
+		updateItem = readValue("customer-update.json", CustomerDTO.class);
+	}
+	
 	@Test
 	@Order(1)
 	void createItem() {
 
-		CustomerDTO newCustomer = CustomerDataTesting.createDTO();
-
 		RequestSpecification requestSpecification = createSpec();
-		requestSpecification.body(newCustomer);
+		requestSpecification.body(newItem);
 
 		Response response;
 		response = given().spec(requestSpecification).when().post(CustomerDef.CUSTOMER_PATH);
 		response.then().statusCode(HttpStatus.CREATED.value());
 
-		customerId = response.path("id");
-		CustomerDTO actualCustomer = response.as(CustomerDTO.class);
-		assertObject(newCustomer, actualCustomer);
+		itemId = response.path("id");
+		CustomerDTO actualItem = response.as(CustomerDTO.class);
+		assertObject(newItem, actualItem);
 
 	}
 
@@ -60,19 +68,16 @@ class CustomerAPITest extends APITest {
 	@Order(2)
 	void updateItem() {
 
-		CustomerDTO updateCustomer = new CustomerDTO();
-		updateCustomer.setId(customerId);
-		updateCustomer.setActive(false);
-
+		updateItem.setId(itemId);
 		RequestSpecification requestSpecification = createSpec();
-		requestSpecification.body(updateCustomer);
+		requestSpecification.body(updateItem);
 
 		Response response;
 		response = given().spec(requestSpecification).when().put(CustomerDef.CUSTOMER_PATH);
 		response.then().statusCode(HttpStatus.OK.value());
 		
-		CustomerDTO actualCustomer = response.as(CustomerDTO.class);
-		assertObject(updateCustomer, actualCustomer);
+		CustomerDTO actualItem = response.as(CustomerDTO.class);
+		assertObject(updateItem, actualItem);
 	}
 
 	@Test
@@ -80,7 +85,7 @@ class CustomerAPITest extends APITest {
 	void getItem() {
 
 		RequestSpecification requestSpecification = createSpec();
-		requestSpecification.pathParam("id", customerId);
+		requestSpecification.pathParam("id", itemId);
 
 		Response response;
 		response = given().spec(requestSpecification).when().get(CustomerDef.CUSTOMER_PATH + "/{id}");
@@ -104,7 +109,7 @@ class CustomerAPITest extends APITest {
 	void deleteItem() {
 
 		RequestSpecification requestSpecification = createSpec();
-		requestSpecification.pathParam("id", customerId);
+		requestSpecification.pathParam("id", itemId);
 
 		Response response;
 		response = given().spec(requestSpecification).when().delete(CustomerDef.CUSTOMER_PATH + "/{id}");

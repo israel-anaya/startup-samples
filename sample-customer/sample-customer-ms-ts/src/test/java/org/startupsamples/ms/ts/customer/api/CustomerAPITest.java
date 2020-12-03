@@ -5,7 +5,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -17,16 +16,12 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.startupsamples.dm.customer.def.CustomerDef;
 import org.startupsamples.dm.customer.dto.CustomerIdentityInfoDTO;
 import org.startupsamples.dm.customer.service.feign.ETCustomerService;
 import org.startupsamples.dm.customer.service.feign.MTCustomerIdentityService;
 import org.startupsamples.ms.ts.customer.dto.CustomerAPIModel;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -35,10 +30,9 @@ import io.restassured.specification.RequestSpecification;
 @TestMethodOrder(OrderAnnotation.class)
 class CustomerAPITest extends APITest {
 
-	static ObjectMapper objectMapper = new ObjectMapper();
-	static String customerId;
-	static CustomerAPIModel newCustomer;
-	static CustomerAPIModel updateCustomer;
+	static String itemId;
+	static CustomerAPIModel newItem;
+	static CustomerAPIModel updateItem;
 
 	@MockBean
 	MTCustomerIdentityService mtCustomerIdentityService;
@@ -69,17 +63,12 @@ class CustomerAPITest extends APITest {
 		assertProperty(expected::getBirthPlace, actual::getBirthPlace);
 	}
 
-	static <T> T readValue(String path, Class<T> valueType) throws IOException {
-		Resource resource = new ClassPathResource(path);
-		InputStream inputstream = resource.getInputStream();
-		return objectMapper.readValue(inputstream, valueType);
-	}
+
 
 	@BeforeAll
 	static void initData() throws IOException {
-		newCustomer = readValue("ts-customer-create.json", CustomerAPIModel.class);
-		updateCustomer = readValue("ts-customer-update.json", CustomerAPIModel.class);
-
+		newItem = readValue("customer-create.json", CustomerAPIModel.class);
+		updateItem = readValue("customer-update.json", CustomerAPIModel.class);
 	}
 
 	@Test
@@ -91,15 +80,15 @@ class CustomerAPITest extends APITest {
 		when(mtCustomerIdentityService.validate(any())).thenReturn(identityResult);
 
 		RequestSpecification requestSpecification = createSpec();
-		requestSpecification.body(newCustomer);
+		requestSpecification.body(newItem);
 
 		Response response;
 		response = given().spec(requestSpecification).when().post(CustomerDef.CUSTOMER_PATH);
 		response.then().statusCode(HttpStatus.CREATED.value());
 
-		customerId = response.path("id");
-		CustomerAPIModel actualCustomer = response.as(CustomerAPIModel.class);
-		assertObject(newCustomer, actualCustomer);
+		itemId = response.path("id");
+		CustomerAPIModel actualItem = response.as(CustomerAPIModel.class);
+		assertObject(newItem, actualItem);
 
 	}
 
@@ -107,15 +96,16 @@ class CustomerAPITest extends APITest {
 	@Order(2)
 	void updateItem() {
 
+		updateItem.setId(itemId);
 		RequestSpecification requestSpecification = createSpec();
-		requestSpecification.body(updateCustomer);
+		requestSpecification.body(updateItem);
 
 		Response response;
 		response = given().spec(requestSpecification).when().put(CustomerDef.CUSTOMER_PATH);
 		response.then().statusCode(HttpStatus.OK.value());
 
-		CustomerAPIModel actualCustomer = response.as(CustomerAPIModel.class);
-		assertObject(updateCustomer, actualCustomer);
+		CustomerAPIModel actualItem = response.as(CustomerAPIModel.class);
+		assertObject(updateItem, actualItem);
 
 	}
 
@@ -124,7 +114,7 @@ class CustomerAPITest extends APITest {
 	void getItem() {
 
 		RequestSpecification requestSpecification = createSpec();
-		requestSpecification.pathParam("id", customerId);
+		requestSpecification.pathParam("id", itemId);
 
 		Response response;
 		response = given().spec(requestSpecification).when().get(CustomerDef.CUSTOMER_PATH + "/{id}");
@@ -147,7 +137,7 @@ class CustomerAPITest extends APITest {
 	void deleteItem() {
 
 		RequestSpecification requestSpecification = createSpec();
-		requestSpecification.pathParam("id", customerId);
+		requestSpecification.pathParam("id", itemId);
 
 		Response response;
 		response = given().spec(requestSpecification).when().delete(CustomerDef.CUSTOMER_PATH + "/{id}");
