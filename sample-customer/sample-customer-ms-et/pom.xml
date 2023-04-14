@@ -17,13 +17,14 @@
 
 	<properties>
 		<m2e.apt.activation>jdt_apt</m2e.apt.activation>
+		<image.registry>startup</image.registry>
 	</properties>
-
+	
 	<dependencies>
 		<!-- Startup Data -->
 		<dependency>
 			<groupId>org.startupframework</groupId>
-			<artifactId>startup-starter-data</artifactId>
+			<artifactId>startup-starter-data-web</artifactId>
 			<version>1.0.2.RELEASE</version>
 		</dependency>
 		<!-- Domains -->

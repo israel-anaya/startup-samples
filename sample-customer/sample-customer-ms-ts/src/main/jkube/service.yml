@@ -1,0 +1,9 @@
+metadata:
+  namespace: msa
+spec:
+  type: NodePort
+  ports:
+  - name: http-service
+    port: 80
+    protocol: TCP
+    targetPort: 8080

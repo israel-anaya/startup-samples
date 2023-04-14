@@ -22,12 +22,11 @@ import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.startupframework.data.entity.OldNewPred;
 import org.startupframework.data.service.EntityServiceBase;
+import org.startupframework.entity.OldNewPred;
 import org.startupsamples.ms.et.customer.entity.CustomerEntity;
-import org.startupsamples.ms.et.customer.service.CustomerService;
-
 import org.startupsamples.ms.et.customer.entity.CustomerEntity_;
+import org.startupsamples.ms.et.customer.service.CustomerService;
 
 /**
  *

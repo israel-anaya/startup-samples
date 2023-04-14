@@ -25,7 +25,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.startupframework.data.entity.EntityBase;
-import org.startupframework.data.entity.id.EntityId;
+import org.startupframework.entity.id.EntityId;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

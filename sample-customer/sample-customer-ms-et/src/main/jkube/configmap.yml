@@ -1,0 +1,11 @@
+metadata:
+  namespace: startup
+data:
+  JAVA_OPTS_MEM: -Xmx74M -XX:MaxMetaspaceSize=80M -Xss366K
+  SPRING_OPTS: >-
+    --server.port=8080
+    --spring.profiles.active=dev
+    --eureka.client.serviceUrl.defaultZone=http://startup-msa-discovery-server/eureka/
+    --spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http://startup-msa-authorization-server/auth/realms/startupframework/protocol/openid-connect/certs
+    --startup.dependencies=startup-msa-discovery-server:80,startup-msa-config-server:80
+

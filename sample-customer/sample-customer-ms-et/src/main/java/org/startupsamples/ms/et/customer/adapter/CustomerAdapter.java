@@ -21,7 +21,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.startupframework.data.adapter.CRUDAdapter;
-import org.startupframework.data.entity.DataConverter;
+import org.startupframework.entity.DataConverter;
 import org.startupsamples.dm.customer.dto.CustomerDTO;
 import org.startupsamples.ms.et.customer.entity.CustomerEntity;
 import org.startupsamples.ms.et.customer.service.CustomerService;

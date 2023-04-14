@@ -22,7 +22,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.startupframework.data.adapter.CRUDChildAdapter;
-import org.startupframework.data.entity.DataConverter;
+import org.startupframework.entity.DataConverter;
 import org.startupsamples.dm.customer.dto.CustomerAddressDTO;
 import org.startupsamples.ms.et.customer.entity.CustomerAddressEntity;
 import org.startupsamples.ms.et.customer.service.CustomerAddressService;

@@ -1,0 +1,45 @@
+metadata:
+  namespace: startup
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+      - imagePullPolicy: IfNotPresent
+        envFrom:
+        - configMapRef:
+            name: ${project.artifactId}           
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            memory: 256Mi
+        ports:
+        - name: http-service
+          containerPort: 8080          
+          protocol: TCP
+        livenessProbe:
+          httpGet:
+            port: http-service
+            path: /actuator/health
+          initialDelaySeconds: 180
+          periodSeconds: 30
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            port: http-service
+            path: /actuator/health
+          initialDelaySeconds: 180
+          periodSeconds: 30
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        volumeMounts:
+        - mountPath: "/var/log/http-service/"
+          name: http-service-logs
+      volumes:
+      - name: http-service-logs
+        persistentVolumeClaim:
+          claimName: http-service-logs-pv-claim

@@ -22,7 +22,7 @@
 		<!-- Startup Core -->
 		<dependency>
 			<groupId>org.startupframework</groupId>
-			<artifactId>startup-starter-core</artifactId>
+			<artifactId>startup-starter-core-web</artifactId>
 			<version>1.0.2.RELEASE</version>
 		</dependency>
 		<!-- Domains -->
